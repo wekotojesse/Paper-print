@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Paperprint</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+</head>
+</head>
+<style>
+ *{
+    font-family:"Nunito", sans-serif ;
+}
+    body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #EFECEC;
+  margin: 0;
+  
+}
+form a{
+    text-decoration: none;
+}
+.form-container {
+  width: 300px;
+  border-radius: 12px;
+  background-color: white;
+  padding: 40px;
+  color: black;
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+
+
+
+.input-group {
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.input-group label {
+  display: block;
+  color: black;
+  margin-bottom: 8px;
+}
+
+.input-group input {
+  width: 100%;
+  border-radius: 6px;
+  border: 2px solid black;
+  outline: 0;
+  background-color: white;
+  padding: 10px 5px;
+  color: black;
+}
+
+.input-group input:focus {
+  border-color:#1e293b;
+}
+
+.forgot {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 12px;
+  line-height: 16px;
+  color: black;
+  margin: 8px 0 14px 0;
+}
+
+.forgot a, .signup a {
+  color: black;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.forgot a:hover, .signup a:hover {
+  text-decoration: none;
+  color: #EC5228;
+}
+
+.sign {
+  display: block;
+  width: 100%;
+  background-color:#FF6B6B ;
+  padding: 12px;
+  text-align: center;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 16px;
+}
+
+.sign:hover {
+  background-color: #EC5228;
+  color: white;
+}
+
+
+.line {
+  height: 1px;
+  flex: 1 1 0%;
+  background-color: rgba(55, 65, 81, 0.7);
+}
+
+
+.signup {
+  text-align: center;
+  font-size: 12px;
+  line-height: 16px;
+  color: black;
+  margin-top: 24px;
+}
+</style>
+<body>
+    <div class="form-container">
+        <p class="title">Login</p>
+        <form class="form">
+          <div class="input-group">
+            <label for="username">Gmail</label>
+            <input type="email" id="username" name="email" placeholder="">
+          </div>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="">
+            <div class="forgot">
+              <a rel="noopener noreferrer" href="#">Forgot Password ?</a>
+            </div>
+          </div>
+         <a href="services.html"> <button class="sign">Login</button></a>
+        </form>
+       
+        <p class="signup">Don't have an account?
+          <a rel="noopener noreferrer" href="products.html" class="">Sign up</a>
+        </p>
+      </div> 
+    
+    
+    
+</body>
+</html>

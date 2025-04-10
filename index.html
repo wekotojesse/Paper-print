@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paperprint Company</title>
+
+    <script src="https://kit.fontawesome.com/df643d2266.js" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            font-family: "Nunito", sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            padding-top: 60px; /* Adjust for fixed header height */
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background-color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 22px;
+            color: #293462;
+            text-decoration: none;
+        }
+
+        .nav-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .nav-toggle:hover {
+            color: #FC6736;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            flex-grow: 1; /* Allow it to take up remaining space */
+            justify-content: center; /* Center the content */
+        }
+
+        .navlinks {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navlinks li a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: black;
+            transition: color 0.3s ease;
+        }
+
+        .navlinks li a:hover {
+            color: #FC6736;
+        }
+
+        .right-nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+
+        .form-control {
+            padding: 8px 10px 8px 30px;
+            border-radius: 15px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            width: 150px;
+            transition: width 0.3s ease;
+            text-align: left; /* Align search text to the left */
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #007bff;
+            width: 200px;
+        }
+
+        .user-icon {
+            margin-left: 15px;
+            color: black;
+            transition: color 0.3s ease;
+        }
+
+        .user-icon a:hover {
+            color: red;
+        }
+
+        .navbutton {
+            margin-left: 15px;
+            background-color: #FF6B6B;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            padding: 5px 15px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbutton:hover {
+            background-color: #EC5228;
+        }
+
+        main {
+            padding-top: 20px;
+        }
+
+        .hero-section {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background-color: #f9f9f9;
+            margin-top: 80px; /* Adjusted margin-top */
+            margin-left: 15px;
+            margin-right: 15px;
+            padding-bottom: 40px;
+            padding-top: 40px;
+            border-radius: 8px;
+            flex-direction: column; /* Stack content on smaller screens */
+            text-align: center; /* Center text on smaller screens */
+        }
+
+        .left-content {
+            padding-right: 0;
+            margin-bottom: 20px; /* Add spacing below text on smaller screens */
+        }
+
+        .left-content h1 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .left-content p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .left-content button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 5px;
+            transition: transform 0.3s ease;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .left-content button:hover {
+            transform: translateY(-3px);
+            background-color: #EC5228;
+        }
+
+        .mini-carousel-container {
+            width: 90%; /* Make carousel responsive width */
+            max-width: 400px; /* Set maximum width */
+            height: auto; /* Make height adjust to content */
+            aspect-ratio: 4 / 2; /* Maintain aspect ratio */
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .mini-carousel-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .mini-carousel-item {
+            flex-shrink: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mini-carousel-item img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .mini-carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 8px 12px;
+            border-radius: 50%;
+            color: #333;
+            cursor: pointer;
+            font-size: 1.2em;
+            user-select: none;
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            outline: none;
+        }
+
+        .mini-carousel-arrow:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+
+        .mini-carousel-arrow.left {
+            left: 10px;
+        }
+
+        .mini-carousel-arrow.right {
+            right: 10px;
+        }
+
+        .container2 {
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+        }
+
+        .grid1, .grid2 {
+            display: flex;
+            flex-direction: column; /* Stack on smaller screens */
+            margin: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* To contain rounded corners of image */
+        }
+
+        .grid1 img, .grid2 img {
+            width: 100%; /* Make images responsive */
+            height: auto;
+            border-radius: 5px 5px 0 0; /* Rounded top corners */
+            margin-right: 0; /* Remove right margin */
+        }
+
+        .grid1 p, .grid2 p {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .grid2 {
+            flex-direction: column-reverse; /* Reverse order on smaller screens if needed */
+        }
+
+        .container2 :hover .grid1,
+        .container2 :hover .grid2 {
+            background-color: #eee;
+            color: #293462;
+            transition: background-color 0.4s ease-in;
+            transform: translateY(-2px);
+        }
+
+        article {
+            background-color: #f4f4f4;
+            padding: 30px 15px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .articlenot, .articlenot2 {
+            display: flex;
+            flex-direction: column; 
+            align-items: center; 
+        }
+
+        .articlenot h1, .articlenot2 h1 {
+            margin-right: 0;
+            margin-bottom: 15px;
+            color: black;
+            font-size: 1.5em;
+        }
+
+        .articlenot button, .articlenot2 button {
+            width: 150px;
+            height: 50px;
+            border-radius: 8px;
+            border: 0;
+            background-color: #293462;
+            color: white;
+            transition: background-color 0.3s ease-in;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 10px 0;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .articlenot button:hover, .articlenot2 button:hover {
+            background-color: #FC6736;
+            color: white;
+            cursor: pointer;
+        }
+
+        .entirepackagesection {
+            display: flex;
+            flex-direction: column; /* Stack sections */
+            background-color: #eee;
+            padding: 20px 15px;
+            margin: 0;
+            border-radius: 0;
+            transition: background-color 0.4s ease-in;
+        }
+
+        .entirepackagesection:hover {
+            background-color: rgb(231, 231, 231);
+        }
+
+        .packagesection, .packagesection2 {
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa;
+            margin: 15px;
+            padding-bottom: 20px;
+            border-radius: 10px;
+            border: 1px solid #7b7b7b;
+            transition: background-color 0.4s ease-in;
+        }
+
+        .packagesection:hover, .packagesection2:hover {
+            background-color: #293462;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .pckgimg {
+            display: flex;
+            justify-content: center;
+        }
+
+        .pckgimg img {
+            width: 90%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .pckgtext {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .numbersgained {
+            background-color: azure;
+            display: flex;
+            flex-direction: column; /* Stack counters */
+            align-items: center;
+            justify-content: center;
+            padding: 30px 15px;
+            margin: 15px;
+            border-radius: 6px;
+        }
+
+        .counter-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .counter {
+            font-size: 40px;
+            margin-top: 10px;
+        }
+
+        .counter-container i {
+            font-size: 2em;
+        }
+
+        .map {
+            margin: 20px 15px;
+        }
+
+        .map iframe {
+            width: 100%;
+            height: 300px;
+            border: 5px solid #ddd;
+            border-radius: 6px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding: 30px 15px;
+            font-size: 12px;
+            color: #333;
+            border-top: 1px solid #eee;
+            display: flex;
+            flex-direction: column; /* Stack sections */
+            align-items: center; /* Center items */
+        }
+
+        .footer-section {
+            flex: 0 0 auto;
+            max-width: 100%;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .footer-section h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #222;
+            font-size: 1.1em;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-section li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section a {
+            text-decoration: none;
+            color: #555;
+        }
+
+        .footer-section a:hover {
+            color: #007bff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 50px; /* Adjust for smaller header */
+            }
+
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px 15px;
+            }
+
+            .navbar-brand {
+                margin-bottom: 10px;
+            }
+
+            .nav-toggle {
+                display: block;
+                position: absolute;
+                top: 10px;
+                right: 15px;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                padding-top: 10px;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .navlinks {
+                flex-direction: column;
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .navlinks li a {
+                margin: 10px 0;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 10px;
+                text-align: center;
+            }
+
+            .navlinks li a:last-child {
+                border-bottom: none;
+            }
+
+            .right-nav {
+                display: flex; /* Keep items in a row initially */
+                flex-direction: column; /* Stack them on smaller screens */
+                width: 100%;
+            }
+
+            .search-container {
+                margin-left: 0;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .form-control {
+                width: calc(100% - 30px);
+            }
+
+            .form-control:focus {
+                width: calc(100% - 30px);
+            }
+
+            .user-icon, .navbutton {
+                margin-left: 0;
+                margin-top: 10px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .left-content {
+                padding-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .left-content button {
+                margin: 5px;
+            }
+
+            .container2 {
+                padding: 10px;
+            }
+
+            .grid1, .grid2 {
+                flex-direction: column;
+                margin: 10px;
+            }
+
+            .grid2 {
+                flex-direction: column-reverse; /* Maintain reverse order */
+            }
+
+            .articlenot, .articlenot2 {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .entirepackagesection {
+                flex-direction: column;
+            }
+
+            .packagesection, .packagesection2 {
+                margin: 10px;
+            }
+
+            .numbersgained {
+                flex-direction: column;
+                padding: 20px;
+                margin: 10px;
+            }
+
+            .counter-container {
+                margin: 15px;
+            }
+
+            .map {
+                margin: 15px;
+            }
+
+            .footer {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-section {
+                margin-bottom: 15px;
+                max-width: 100%;
+            }
+        }
+
+        /* Larger screens - Center nav links, right align others */
+        @media (min-width: 769px) {
+            .navbar {
+                justify-content: space-between; /* Keep brand on the left */
+            }
+
+            .nav-menu {
+                display: flex;
+                flex-grow: 1;
+                justify-content: center; /* Center the nav links */
+                margin-left: 0;
+            }
+
+            .right-nav {
+                display: flex;
+                align-items: center;
+            }
+
+            .search-container, .user-icon, .navbutton {
+                margin-left: 20px;
+            }
+
+            .nav-toggle {
+                display: none !important;
+            }
+
+            .hero-section {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+                padding: 40px;
+            }
+
+            .left-content {
+                flex: 1;
+                padding-right: 30px;
+                margin-bottom: 0;
+            }
+
+            .mini-carousel-container {
+                width: 400px;
+                height: 200px;
+            }
+
+            .container2 {
+                padding: 30px;
+            }
+
+            .grid1, .grid2 {
+                flex-direction: row;
+                margin: 30px;
+            }
+
+            .grid1 img, .grid2 img {
+                width: 750px; /* Adjust as needed */
+                height: 400px; /* Adjust as needed */
+                border-radius: 5px;
+            }
+
+            .grid2 {
+                flex-direction: row-reverse;
+            }
+
+            .grid2 img {
+                margin-right: 0;
+            }
+
+            .grid1 p, .grid2 p {
+                text-align: center;
+                padding: 50px;
+            }
+
+            .articlenot, .articlenot2 {
+                flex-direction: row;
+                justify-content: center;
+            }
+
+            .articlenot h1, .articlenot2 h1 {
+                margin-right: 30px;
+                margin-bottom: 0;
+            }
+
+            .entirepackagesection {
+                flex-direction: row;
+                justify-content: center;
+                padding: 50px;
+            }
+
+            .packagesection, .packagesection2 {
+                margin: 0 25px;
+            }
+
+            .numbersgained {
+                flex-direction: row;
+                justify-content: space-around;
+                padding: 40px;
+                margin: 30px;
+            }
+
+            .map {
+                margin: 40px;
+            }
+
+            .map iframe {
+                width: 1100px;
+                height: 400px;
+            }
+
+            .footer {
+                flex-direction: row;
+                justify-content: space-around;
+                padding: 40px 20px;
+                align-items: flex-start;
+                text-align: left;
+            }
+
+            .footer-section {
+                margin-bottom: 0;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="Home.html" class="navbar-brand" style="text-decoration: none; color: #293462;">PAPERPRINT</a>
+            <div class="nav-menu">
+                <ul class="navlinks">
+                    <li><a href="products.html">Packages</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="right-nav">
+                <div class="search-container">
+                    <i class="fa-solid fa-magnifying-glass fa-lg search-icon"></i>
+                    <input type="text" class="form-control" placeholder="Search Paperprint...">
+                </div>
+                <a href="#profile" class="user-icon">
+                    <i class="fa-solid fa-user fa-bounce fa-lg"></i>
+                </a>
+                <a href="login.html" class="navbutton">
+                    Login
+                </a>
+            </div>
+            <div class="nav-toggle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="left-content">
+                <h1>CREATE YOUR OWN DESIGN</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos fugit commodi quisquam nisi aliquid magnam vitae. Repellendus neque sunt consequatur corrupti nesciunt? Pariatur exercitationem dignissimos, tenetur adipisci voluptatibus perspiciatis numquam!</p>
+                <a href=""><button>Sign Up</button></a>
+                <a href=""><button>Login</button></a>
+            </div>
+            <div class="mini-carousel-container">
+                <div class="mini-carousel-inner">
+                    <div class="mini-carousel-item">
+                        <img src="https://i.pinimg.com/736x/bf/e9/67/bfe96783fa32a00f0a90fed952694460.jpg" alt="Image 1">
+                    </div>
+                    <div class="mini-carousel-item">
+                        <img src="https://i.pinimg.com/736x/8f/35/62/8f356202a4774e558bd27ff76bb1c42f.jpg" alt="Image 2">
+                    </div>
+                    <div class="mini-carousel-item">
+                        <img src="https://i.pinimg.com/736x/00/9c/46/009c46737041716064caedf9d604da33.jpg" alt="Image 3">
+                    </div>
+                </div>
+                <button class="mini-carousel-arrow left" onclick="prevSlide()">❮</button>
+                <button class="mini-carousel-arrow right" onclick="nextSlide()">❯</button>
+            </div>
+        </section>
+        <div class="container2">
+            <div class="grid1">
+                <img src="https://i.pinimg.com/736x/b4/aa/9c/b4aa9c616a1253129a0d1e88d392c7d3.jpg" alt="">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ad totam dicta fugit, tenetur numquam reiciendis eligendi quo impedit facere placeat dolorum, quisquam odio quas corrupti amet consequuntur itaque a.</p>
+            </div>
+            <div class="grid2">
+                <img src="https://i.pinimg.com/736x/52/6f/61/526f6157392de793691f850b575cb77b.jpg" alt="">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores ullam nisi ducimus quibusdam facilis fuga quo. Itaque voluptatibus rerum corrupti, id error non explicabo, nobis quo sint exercitationem, et commodi?</p>
+            </div>
+        </div>
+
+        <article>
+            <div class="articlenot">
+                <h1>LOREM</h1>
+                <a href=""><button>SIGN UP <span></span><i class="fa-solid fa-caret-right fa-fade"></i></button></a>
+            </div>
+        </article>
+
+        <div class="entirepackagesection">
+            <div class="packagesection">
+                <div class="pckgimg">
+                    <img src="https://i.pinimg.com/736x/20/22/75/202275e15d9cc981fa43bcb3b7b4885f.jpg" alt="">
+                </div>
+                <div class="pckgtext">
+                    <h1>PREMIUM DESIGNS</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates dicta eaqueexpedita fugit aut minima sapiente aliquid possimus quia, veniam officiis ex molestiae vitae earum eum dignissimos numquam culpa consectetur!</p>
+                </div>
+            </div>
+
+            <div class="packagesection2">
+                <div class="pckgimg">
+                    <img src="https://i.pinimg.com/736x/0a/c1/cf/0ac1cfa1dc395ef62f4b304f747c167b.jpg" alt="">
+                </div>
+                <div class="pckgtext">
+                    <h1>BASIC DESIGNS</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates dicta eaque, expedita fugit aut minima sapiente aliquid possimus quia, veniam officiis ex molestiae vitae earum eum dignissimos numquam culpa consectetur!</p>
+                </div>
+            </div>
+        </div>
+        <article class="pckgbutton">
+            <div class="articlenot2">
+                <h1>LOREM</h1>
+                <a href=""><button>Get started <span></span><i class="fa-solid fa-caret-right fa-fade"></i></button></a>
+            </div>
+        </article>
+        <div class="numbersgained">
+            <div class="counter-container">
+                <i class="fa-solid fa-sack-dollar fa-2xl"></i>
+                <br>
+                <div class="counter" data-target="10000"></div>
+                <span>Total Revenue</span>
+            </div>
+
+            <div class="counter-container">
+                <i class="fa-solid fa-bag-shopping fa-2xl"></i>
+                <br>
+                <div class="counter" data-target="500"></div>
+                <span>Orders</span>
+            </div>
+
+            <div class="counter-container">
+                <i class="fa-solid fa-people-group fa-2xl"></i>
+                <br>
+                <div class="counter" data-target="300"></div>
+                <span>Customers</span>
+            </div>
+
+        </div>
+        <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7837837837837!2d32.58258507476869!3d0.3134783996741531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbb41d61a69ed%3A0x81a6a69f027c191a!2sKampala%2C%20Uganda!5e0!3m2!1sen!2sus!4v1712765703288!5m2!1sen!2sus" width="1100" height="400" style="border:0; border-radius: 6px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <article>
+            <div class="articlenot">
+                <h1>LOREM</h1>
+                <a href=""><button>SIGN UP <span></span><i class="fa-solid fa-caret-right fa-fade"></i></button></a>
+            </div>
+        </article>
+    </main>
+    <footer>
+
+        <div class="footer">
+            <div class="footer-section">
+                <h4>Packages</h4>
+                <ul>
+                    <li><a href="products.html">Party</a></li>
+                    <li><a href="products.html">Clothing</a></li>
+                    <li><a href="products.html">Office</a></li>
+                    <li><a href="products.html">Customized packages</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="services.html">Logo design</a></li>
+                    <li><a href="services.html">Marketing</a></li>
+                    <li><a href="services.html"> Sustainability & Recycling</a></li>
+                    <li><a href="services.html">Worldwide Shipping </a></li>
+                    <li><a href="services.html">Personalized products </a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li><a href="contact.html">Email</a></li>
+                    <li><a href="contact.html">Message</a></li>
+                    <li><a href="contact.html">Call Us</a></li>
+                </ul>
+            </div>
+        </div>
+</footer>
+
+<script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+    });
+
+    const counterElements = document.querySelectorAll('.counter');
+
+    counterElements.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        const increment = Math.ceil(target / 200); // Adjust for speed
+
+        let count = 0;
+
+        const updateCounter = () => {
+            count += increment;
+            counter.innerText = count > target ? target + '+' : count;
+
+            if (count < target) {
+                setTimeout(updateCounter, 10);
+            }
+        };
+
+        updateCounter();
+    });
+
+    const carouselInner = document.querySelector('.mini-carousel-inner');
+    const carouselItems = document.querySelectorAll('.mini-carousel-item');
+    const totalItems = carouselItems.length;
+    let currentIndex = 0;
+
+    function updateCarousel() {
+        carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalItems;
+        updateCarousel();
+    }
+
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+        updateCarousel();
+    }
+
+    // Optional: Auto slide
+    // setInterval(nextSlide, 3000);
+</script>
+</body>
+</html>
